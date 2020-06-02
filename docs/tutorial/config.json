@@ -1,6 +1,6 @@
 {
-    "title": "Learn You docs For Much Win",
-    "repo": "<your GitHub username>/<GitHub repo name>",
-    "description": "Thanks for writing a tutorial with Viewsaurus! This example tutorial will show you the basic functionality of Viewsaurus. Click the \"Start\" button below to see how Viewsaurus works.",
+    "title": "Route Callers to DNC via IVR",
+    "repo": "ringcentral-tutorials/dnc-via-ivr-rest-demo",
+    "description": "Learn how to allow callers to put themsevles on the do not call list by routing through IVR Studio and using the Engage Voice Platform API to add their number to the do not call list. Click the \"Start Tutorial\" button below to begin.",
     "heroku": false
 }
