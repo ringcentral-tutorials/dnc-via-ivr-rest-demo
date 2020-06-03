@@ -1,36 +1,55 @@
-.chapter(data-title='Your New Viewsaurus Tutorial')
-  .step(data-title='Welcome!', data-file='tutorial/config.json')
-    h2 Welcome to Viewsaurus
-
-    p Thanks for writing a Viewsaurus tutorial! If you're new to Viewsaurus, feel free to click through this brief tutorial showing you how a Viewsaurus tutorial is structured.
-
-    p The tutorial's navigation controls are located above this text. Use <i class="fa fa-fw fa-play"></i> to move to the next step of the tutorial. Use <i class="fa fa-fw fa-play fa-rotate-180"></i> to move to the previous step of the tutorial (if there is one). Use <i class="fa fa-fw fa-list"></i> to see an overview of all the steps in the tutorial.
-
-    p Let's begin by walking through the files generated for you in the `tutorial` directory with the `saurus new` command - those files are actually what is being used to show you this tutorial right now!
-
-  .step(data-title='Tutorial Configuration', data-file='tutorial/config.json')
+.chapter(data-title='Engage Voice DNC Via IVR Tutorial')
+  .step(data-title='Welcome!', data-file='../blank.md')
     :markdown
-      ## Configuration
+      ## Welcome to the tutorial
 
-      The first file we'll look at is `config.json`. This contains high-level configuration information about your tutorial. This JSON file contains several properties you can declare about your tutorial:
+      This tutorial will walk you through the process of routing callers to options that allow them to put themselves on the do not call list.
 
-      * `title`: This is the title of your tutorial which will show on the first page
-      * `description`: This is a string of text that will appear above the "Start" button for your tutorial.
-      * `repo`: This is the GitHub repo that your code lives in. Right now we assume all projects are hosted there, but we'll likely make this agnostic in the future.
-      * `heroku`: This indicates whether or not your project supports instant deployment with the [Heroku Button](https://blog.heroku.com/archives/2014/8/7/heroku-button)
+      For this tutorial, you'll do most of the work in the Engage Voice UI, but must add the caller to the do not call list using a REST API call.
 
-      Now, let's take a look at the first file that contains the actual content of the tutorial, `index.jade`.
+      ![](images/ivr-dnc-welcome.png)
 
-  .step(data-title='Step Two')
-    h2 Under Construction
+  .step(data-title='Get Input', data-file='../input-properties.md')
+    :markdown
+      ## Get input from the caller using DMTF
 
-    p more tutorial to come.
+      Let's begin by creating a workflow in IVR Studio that answers the call and asks for input from the caller about what they would like to do next. In this property window, we create two DTMF options that can direct the call down one of our two paths. The audio file instructs the caller what their options are and in this case, we have the option to leave a voicemail (1) or be put on the do not call list (2).
 
-  //- Example: include markdown file
-    .step(data-title='Step Three', data-file='', data-highlight='')
-      include:markdown three.md
+      ![](images/ivr-answer-input.png)
+      ![](images/input-properties-dialog.png)
 
-  //- Example: include jade file (don't need file extension)
-    .step(data-title='Step Four', data-file='', data-highlight='')
-      include four
+  .step(data-title='Press 2, Route to DNC', data-file='../www-properties.md', data-highlight='1-6')
+    :markdown
+      ## Route caller to DNC
 
+      Since the caller elected to be put on the do not call list by pressing "2", we can put them on our DNC list using the REST call.  First click on the "?" and select "2" as the input connection property selection.
+
+      ![](images/ivr-answer-input-www.png)
+      ![](images/get-input-connection-properties-dialog.png)
+
+  .step(data-title='Invoke REST API', data-file='../www-properties.md', data-highlight='8-21')
+    :markdown
+      ## Use REST API for DNC list
+
+      Let's configure the REST API call to place this caller on the DNC using their ANI (phone number). We'll need to enter some information like the Type, URL and audio that will play with this action. A JSON body is supplied with the caller's ANI and we'll need a fixed value x-auth-token that will be your own auth token.
+
+      ![](images/ivr-answer-input-www.png)
+      ![](images/www-properties-dialog.png)
+
+  .step(data-title='Play Audio', data-file='../play-audio-properties.md')
+    :markdown
+      ## Play audio for DNC
+
+      Now configure a Play Audio node to let the caller know that their ANI (phone number) has been place on the do not call list.
+
+      ![](images/ivr-answer-input-www-audio.png)
+      ![](images/play-audio-properties-dialog.png)
+
+
+  .step(data-title='Hangup', data-file='../blank.md')
+    :markdown
+      ## Close IVR workflow with hangup
+
+      With the caller's name now on the DNC, and after letting the caller know their name is on the DNC, we can hangup this call.
+
+      ![](/images/ivr-answer-input-www-audio-hangup.png)
