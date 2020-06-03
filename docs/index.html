@@ -17,14 +17,25 @@
 <p>Let&#39;s begin by creating a workflow in IVR Studio that answers the call and asks for input from the caller about what they would like to do next. In this property window, we create two DTMF options that can direct the call down one of our two paths. The audio file instructs the caller what their options are and in this case, we have the option to leave a voicemail (1) or be put on the do not call list (2).</p>
 <p><img src="images/ivr-answer-input.png" alt="">
 <img src="images/input-properties-dialog.png" alt=""></p>
-</div><div data-title="Press 2, Route to DNC" data-file="../www-properties.md" data-highlight="1-6" class="step"><h2 id="route-caller-to-dnc">Route caller to DNC</h2>
+</div><div data-title="Press 2, Route to DNC" data-file="../www-properties.md" data-highlight="7" class="step"><h2 id="route-caller-to-dnc">Route caller to DNC</h2>
 <p>Since the caller elected to be put on the do not call list by pressing &quot;2&quot;, we can put them on our DNC list using the REST call.  First click on the &quot;?&quot; and select &quot;2&quot; as the input connection property selection.</p>
 <p><img src="images/ivr-answer-input-www.png" alt="">
 <img src="images/get-input-connection-properties-dialog.png" alt=""></p>
-</div><div data-title="Invoke REST API" data-file="../www-properties.md" data-highlight="8-21" class="step"><h2 id="use-rest-api-for-dnc-list">Use REST API for DNC list</h2>
-<p>Let&#39;s configure the REST API call to place this caller on the DNC using their ANI. We&#39;ll need to enter some information like the Type, URL and audio that will play with this action. A JSON body is supplied with the caller&#39;s ANI and we&#39;ll need a fixed value x-auth-token that will be your own auth token.</p>
+</div><div data-title="Configure Remote Call" data-file="../www-properties.md" data-highlight="1-6" class="step"><h2 id="rest-api-endpoint-for-dnc">REST API endpoint for DNC</h2>
+<p>Let&#39;s configure the REST API call to place this caller on the DNC using their ANI (phone number). First we&#39;ll need to enter some information like the method (Type), endpoint (URL), and content type (Format) that will define this action.</p>
 <p><img src="images/ivr-answer-input-www.png" alt="">
 <img src="images/www-properties-dialog.png" alt=""></p>
+</div><div data-title="Create Request Body" data-file="../www-properties.md" data-highlight="8-21" class="step"><h2 id="rest-api-body-content-in-json">REST API body content in JSON</h2>
+<p>Then we&#39;ll need to construct the request body (Body Content) using their ANI (phone number). The data for the JSON body content is shown here.</p>
+<p>Replace {accountId} with your own account ID.</p>
+<p><img src="images/ivr-answer-input-www.png" alt="">
+<img src="images/www-properties-dialog.png" alt=""></p>
+</div><div data-title="Authenticate With Token" data-file="../www-properties.md" data-highlight="8-21" class="step"><h2 id="rest-api-http-headers-for-authentication">REST API HTTP headers for authentication</h2>
+<p>And finally add a custom header with your authentication token.</p>
+<p>To create your own token, click <a href="https://developers.ringcentral.com/engage/voice/guide/authentication/auth-legacy">here</a>.</p>
+<p>Replace the {your auth token} with the auth token you just generated.</p>
+<p><img src="images/ivr-answer-input-www.png" alt="">
+<img src="images/www-properties-dialog-header.png" alt=""></p>
 </div><div data-title="Play Audio" data-file="../play-audio-properties.md" class="step"><h2 id="play-audio-for-dnc">Play audio for DNC</h2>
 <p>Now configure a Play Audio node to let the caller know that their ANI (phone number) has been place on the do not call list.</p>
 <p><img src="images/ivr-answer-input-www-audio.png" alt="">

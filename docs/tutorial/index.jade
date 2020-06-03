@@ -18,7 +18,7 @@
       ![](images/ivr-answer-input.png)
       ![](images/input-properties-dialog.png)
 
-  .step(data-title='Press 2, Route to DNC', data-file='../www-properties.md', data-highlight='1-6')
+  .step(data-title='Press 2, Route to DNC', data-file='../www-properties.md', data-highlight='7')
     :markdown
       ## Route caller to DNC
 
@@ -27,14 +27,38 @@
       ![](images/ivr-answer-input-www.png)
       ![](images/get-input-connection-properties-dialog.png)
 
-  .step(data-title='Invoke REST API', data-file='../www-properties.md', data-highlight='8-21')
+  .step(data-title='Configure Remote Call', data-file='../www-properties.md', data-highlight='1-6')
     :markdown
-      ## Use REST API for DNC list
+      ## REST API endpoint for DNC
 
-      Let's configure the REST API call to place this caller on the DNC using their ANI (phone number). We'll need to enter some information like the Type, URL and audio that will play with this action. A JSON body is supplied with the caller's ANI and we'll need a fixed value x-auth-token that will be your own auth token.
+      Let's configure the REST API call to place this caller on the DNC using their ANI (phone number). First we'll need to enter some information like the method (Type), endpoint (URL), and content type (Format) that will define this action.
 
       ![](images/ivr-answer-input-www.png)
       ![](images/www-properties-dialog.png)
+
+  .step(data-title='Create Request Body', data-file='../www-properties.md', data-highlight='8-21')
+    :markdown
+      ## REST API body content in JSON
+
+      Then we'll need to construct the request body (Body Content) using their ANI (phone number). The data for the JSON body content is shown here.
+
+      Replace {accountId} with your own account ID.
+
+      ![](images/ivr-answer-input-www.png)
+      ![](images/www-properties-dialog.png)
+
+  .step(data-title='Authenticate With Token', data-file='../www-properties.md', data-highlight='8-21')
+    :markdown
+      ## REST API HTTP headers for authentication
+
+      And finally add a custom header with your authentication token.
+
+      To create your own token, click [here](https://developers.ringcentral.com/engage/voice/guide/authentication/auth-legacy).
+
+      Replace the {your auth token} with the auth token you just generated.
+
+      ![](images/ivr-answer-input-www.png)
+      ![](images/www-properties-dialog-header.png)
 
   .step(data-title='Play Audio', data-file='../play-audio-properties.md')
     :markdown
